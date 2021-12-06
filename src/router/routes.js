@@ -1,10 +1,23 @@
-
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    path: "/",
+    redirect: "/entry/registration",
+    // TODO => check if there is a cookie saved  redirect to '/app' else redirect it to '/entry'
+  },
+  {
+    path: "/entry",
+    redirect: "/entry/registration",
+    component: () => import('../layouts/Entry.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {path: "registration", component: () => import("pages/Entry/Registration")}
+    ]
+  },
+  {
+    path: '/app',
+    redirect: "/app/directories",
+    component: () => import('../layouts/Application.vue'),
+    children: [
+      {path: "directories", component: () => import("pages/Application/Directories")}
     ]
   },
 
