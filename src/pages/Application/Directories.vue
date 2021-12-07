@@ -1,5 +1,5 @@
 <template>
-  <q-page padding>
+  <q-page padding style="background-color: #f1f1f1">
     <h1>THIS IS DIRS</h1>
   </q-page>
 </template>
