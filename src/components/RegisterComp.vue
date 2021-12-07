@@ -62,6 +62,8 @@ export default {
             res.data.data.root_directory_id
           );
 
+          this.$store.commit("applicationHeader/emailMutation", this.email);
+
           this.$router.push("/app");
 
           this.email = "";
