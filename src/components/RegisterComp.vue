@@ -42,13 +42,32 @@ export default {
   }),
   methods: {
     async submit() {
-      const res = entryBoot()
+      entryBoot()
         .post("/login", {
           email: this.email,
           password: this.password,
         })
+        .then((res) => {
+          Cookies.set("access_token", res.data.data.access_token, {
+            expires: "1d",
+          });
+          Cookies.set("refresh_token", res.data.data.refresh_token, {
+            expires: "1d",
+          });
+          Cookies.set("root_dir_id", res.data.data.root_directory_id, {
+            expires: "1d",
+          });
+          this.$store.commit(
+            "directories/mutateRootDirID",
+            res.data.data.root_directory_id
+          );
+
+          this.$router.push("/app");
+
+          this.email = "";
+          this.password = "";
+        })
         .catch((e) => {
-          //TODO => it should show an error
           this.$store.commit(
             "inAppNotification/componentDisplayMutation",
             true
@@ -59,26 +78,6 @@ export default {
           );
           this.$store.commit("inAppNotification/typeMutation", "error");
         });
-
-      if (res.status === 200) {
-        Cookies.set("access_token", res.data.data.access_token, {
-          expires: "1d",
-        });
-        Cookies.set("refresh_token", res.data.data.refresh_token, {
-          expires: "1d",
-        });
-        Cookies.set("root_dir_id", res.data.data.root_directory_id, {
-          expires: "1d",
-        });
-        this.$store.commit(
-          "directories/mutateRootDirID",
-          res.data.data.root_directory_id
-        );
-        this.$router.push("/app");
-      }
-
-      this.email = "";
-      this.password = "";
     },
   },
 };
