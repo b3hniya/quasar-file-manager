@@ -5,6 +5,7 @@
     <!--  TODO => if root dir was empty then show empty folder component.   -->
 
     <empty-directory />
+    <create-directory />
 
     <!--  TODO => else show all roots in the application.  -->
     <!--    <h1>THIS IS DIRS</h1>-->
@@ -13,10 +14,13 @@
 
 <script>
 import EmptyDirectory from "components/EmptyDirectory";
+import CreateDirectory from "components/CreateDirectory";
 
 export default {
-  components: { EmptyDirectory },
-
+  components: { CreateDirectory, EmptyDirectory },
+  data: () => ({
+    prompt: false,
+  }),
   // name: 'PageName',
 };
 </script>
