@@ -49,7 +49,15 @@ export default {
         })
         .catch((e) => {
           //TODO => it should show an error
-          console.log(e.response.data.message);
+          this.$store.commit(
+            "inAppNotification/componentDisplayMutation",
+            true
+          );
+          this.$store.commit(
+            "inAppNotification/messageMutation",
+            e.response.data.message
+          );
+          this.$store.commit("inAppNotification/typeMutation", "error");
         });
 
       if (res.status === 200) {
