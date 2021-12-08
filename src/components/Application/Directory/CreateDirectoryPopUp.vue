@@ -50,7 +50,26 @@ export default {
   data: () => ({
     dirName: "",
   }),
-  //TODO => add calling api feature to this component.
+
+  methods: {
+    //TODO => add calling api feature to this component.
+    createDirectory(dirId) {
+      // appBoot()
+      //   .post(Cookies.get("root_dir_id"), {
+      //     title: "b",
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .then(() => {
+      //     appBoot()
+      //       .get(Cookies.get("root_dir_id"))
+      //       .then((res) => {
+      //         console.log(res.data);
+      //       });
+      //   });
+    },
+  },
   computed: {
     prompt: {
       get() {
