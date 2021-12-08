@@ -17,7 +17,7 @@ export async function getSubDir(context) {
     .catch((e) => {
       if (e.response.status === 401)
         getNewAccessToken().then(() => {
-          this.$store.dispatch("directories/getSubDir");
+          this.$store.dispatch("getSubDir");
         });
       else {
         this.$store.commit("inAppNotification/componentDisplayMutation", true);
