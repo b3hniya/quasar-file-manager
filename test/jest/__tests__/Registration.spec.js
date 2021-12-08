@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from "@vue/test-utils";
-import Registration from "../../../src/components/RegisterComp";
+import Registration from "components/Entry/RegisterComp";
 import * as All from "quasar";
 import Vuex from "vuex";
 

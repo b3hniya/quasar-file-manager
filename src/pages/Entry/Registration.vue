@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import RegisterComp from "components/RegisterComp";
+import RegisterComp from "components/Entry/RegisterComp";
 export default {
   components: {RegisterComp}
 }

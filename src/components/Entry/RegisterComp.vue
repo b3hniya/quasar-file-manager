@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import entryBoot from "../boot/entryBoot";
-import { Cookies } from "quasar";
+import entryBoot from "boot/entryBoot";
+import * as cookieSetter from "src/core/cookieSetter";
 
 export default {
   name: "RegisterComp",
@@ -41,6 +41,11 @@ export default {
     password: "",
   }),
   methods: {
+    flushFields(){
+
+      this.email = "";
+      this.password = "";
+    },
     async submit() {
       entryBoot()
         .post("/login", {
@@ -48,26 +53,19 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          Cookies.set("access_token", res.data.data.access_token, {
-            expires: "1d",
-          });
-          Cookies.set("refresh_token", res.data.data.refresh_token, {
-            expires: "1d",
-          });
-          Cookies.set("root_dir_id", res.data.data.root_directory_id, {
-            expires: "1d",
-          });
+          cookieSetter.setEmailAddressCookie(this.email);
+          cookieSetter.setAccessTokenCookie(res.data.data.access_token);
+          cookieSetter.setRefreshTokenCookie(res.data.data.refresh_token);
+          cookieSetter.setRootDirIdCookie(res.data.data.root_directory_id);
+
           this.$store.commit(
             "directories/mutateRootDirID",
             res.data.data.root_directory_id
           );
 
           this.$store.commit("applicationHeader/emailMutation", this.email);
-
           this.$router.push("/app");
-
-          this.email = "";
-          this.password = "";
+          this.flushFields();
         })
         .catch((e) => {
           this.$store.commit(
