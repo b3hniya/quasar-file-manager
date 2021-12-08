@@ -59,7 +59,7 @@ export default {
           cookieSetter.setRootDirIdCookie(res.data.data.root_directory_id);
 
           this.$store.commit(
-            "directories/mutateRootDirID",
+            "directories/mutateCurrentDirID",
             res.data.data.root_directory_id
           );
 
