@@ -1,5 +1,12 @@
 export default function () {
   return {
-    rootDirID: "",
+    currentDir: {
+      id: "",
+      name: "",
+      subDirs: [""],
+      isEmpty() {
+        return this.subDirs.length === 0;
+      },
+    }
   }
 }
