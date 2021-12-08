@@ -1,6 +1,6 @@
 <template>
   <div>
-    //TODO => change current dir and triggers new subdir fetches.
+    <!--  TODO => change current dir and triggers new subdir fetches.-->
     <q-icon name="folder"></q-icon>
     <span> {{ name }}</span>
   </div>
