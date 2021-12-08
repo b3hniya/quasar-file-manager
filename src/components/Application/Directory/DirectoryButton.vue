@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!--  TODO => change current dir and triggers new subdir fetches.-->
+  <div @click="changeDir">
     <q-icon name="folder"></q-icon>
     <span> {{ name }}</span>
   </div>
@@ -9,7 +8,14 @@
 <script>
 export default {
   name: "DirectoryButton",
-  props: ["name"],
+  props: ["name", 'id'],
+  methods: {
+    changeDir(){
+      this.$store.commit("directories/mutateCurrentDirID", this.id);
+      this.$store.commit("directories/mutateCurrentDirName", this.name);
+      this.$store.dispatch("directories/getSubDir")
+    }
+  }
 };
 </script>
 
