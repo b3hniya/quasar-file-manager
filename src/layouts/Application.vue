@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ApplicationHeader from "components/ApplicationHeader";
+import ApplicationHeader from "components/Application/ApplicationHeader";
 
 export default {
   name: 'ApplicationLayout',
