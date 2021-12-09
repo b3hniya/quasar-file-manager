@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "DeleteDirectoryPopUp",
+  name: "DeletePopUp",
 };
 </script>
 

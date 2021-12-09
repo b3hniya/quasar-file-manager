@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from "@vue/test-utils";
-import Registration from "components/Entry/RegisterComp";
+import RegisterFields from "components/Entry/RegisterFields";
 import * as All from "quasar";
 import Vuex from "vuex";
 
@@ -22,7 +22,7 @@ describe("Mount Registration page", () => {
   localVue.use(Vuex);
   localVue.use(Quasar, { components }); // , lang: langEn
 
-  const wrapper = mount(Registration, {
+  const wrapper = mount(RegisterFields, {
     localVue,
   });
   const vm = wrapper.vm;
@@ -81,11 +81,5 @@ describe("Mount Registration page", () => {
       await timeout(300);
       expect(vm.email).toBe("");
     });
-
-    // it("call the api and brings you the answere.", async () => {
-    //   await fillPasswordField("testPass1");
-    //   await fillEmailField("test@test1.com");
-    //   await timeout(300);
-    // })
   });
 });

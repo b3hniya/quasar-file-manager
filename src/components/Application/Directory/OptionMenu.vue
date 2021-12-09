@@ -62,7 +62,7 @@
 import appBoot from "boot/appBoot";
 
 export default {
-  name: "DirectoryOptionMenu",
+  name: "OptionMenu",
   props: ["id", "name"],
   data: () => ({
     menu: false,
@@ -76,6 +76,12 @@ export default {
       this.$store.commit("directories/mutateCurrentDirID", this.id);
       this.$store.commit("directories/mutateCurrentDirName", this.name);
       this.$store.dispatch("directories/getSubDir");
+      this.$store.commit("directories/mutateDirs", {
+        name: this.name,
+        id: this.id,
+      });
+
+      this.test = false;
     },
     async deleteDirectory() {
       this.test = false;

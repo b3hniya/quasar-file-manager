@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "EmptyDirectory",
+  name: "EmptyDir",
   methods: {
     openCreateDirectoryPopup() {
       this.$store.commit("createDirectory/promptMutation", true);

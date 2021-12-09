@@ -35,7 +35,7 @@ import entryBoot from "boot/entryBoot";
 import * as cookieSetter from "src/core/cookieSetter";
 
 export default {
-  name: "RegisterComp",
+  name: "RegisterFields",
   data: () => ({
     email: "",
     password: "",

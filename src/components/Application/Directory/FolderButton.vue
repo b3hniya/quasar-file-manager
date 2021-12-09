@@ -1,6 +1,6 @@
 <template>
   <div>
-    <directory-option-menu :id="id" :name="name" />
+    <option-menu :id="id" :name="name" />
     <div class="flex items-center column" id="folder-btn">
       <q-icon @click="changeDir" name="folder" size="96px" />
       <span> {{ name }}</span>
@@ -10,11 +10,11 @@
 
 <script>
 import doubleClickHandler from "src/core/doubleClickHandler";
-import DirectoryOptionMenu from "components/Application/Directory/DirectoryOptionMenu";
+import OptionMenu from "components/Application/Directory/OptionMenu";
 
 export default {
-  name: "DirectoryButton",
-  components: { DirectoryOptionMenu },
+  name: "FolderButton",
+  components: { OptionMenu },
   props: ["name", "id"],
   data: () => ({
     test: true,
@@ -29,6 +29,10 @@ export default {
             context.name
           );
           context.store.dispatch("directories/getSubDir");
+          context.store.commit("directories/mutateDirs", {
+            name: context.name,
+            id: context.id
+          });
         },
         { store: this.$store, id: this.id, name: this.name }
       );

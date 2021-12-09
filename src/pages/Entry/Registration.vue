@@ -1,14 +1,14 @@
 <template>
   <q-page padding class="flex flex-center column" id="entry-page">
     <p id="entry-page-title"> Try this product out for free. </p>
-    <register-comp />
+    <register-fields />
   </q-page>
 </template>
 
 <script>
-import RegisterComp from "components/Entry/RegisterComp";
+import RegisterFields from "components/Entry/RegisterFields";
 export default {
-  components: {RegisterComp}
+  components: {RegisterFields}
 }
 </script>
 
