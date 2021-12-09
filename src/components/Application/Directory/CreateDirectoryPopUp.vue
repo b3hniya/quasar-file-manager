@@ -37,6 +37,7 @@
           label="Create"
           class="bg-dark text-white text-weight-light q-px-xl flex flex-center"
           style="text-transform: none; height: 32px"
+          @click="createDirectory"
           v-close-popup
         />
       </q-card-actions>
@@ -45,6 +46,8 @@
 </template>
 
 <script>
+import appBoot from "boot/appBoot";
+
 export default {
   name: "CreateDirectory",
   data: () => ({
@@ -53,24 +56,20 @@ export default {
 
   methods: {
     //TODO => add calling api feature to this component.
-    createDirectory(dirId) {
-      // appBoot()
-      //   .post(Cookies.get("root_dir_id"), {
-      //     title: "b",
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .then(() => {
-      //     appBoot()
-      //       .get(Cookies.get("root_dir_id"))
-      //       .then((res) => {
-      //         console.log(res.data);
-      //       });
-      //   });
+    async createDirectory() {
+      try {
+        await appBoot().post(this.currentDirId, { title: this.dirName });
+        await this.$store.dispatch("directories/getSubDir");
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
   computed: {
+    currentDirId() {
+      return this.$store.state.directories.currentDir.id;
+    },
+
     prompt: {
       get() {
         return this.$store.state.createDirectory.prompt;
