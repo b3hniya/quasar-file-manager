@@ -15,7 +15,6 @@ export async function getSubDir(context) {
     if (e.response.data.message === "jwt expired") {
       try {
         const res = await getNewAccessToken();
-        console.log(res.data);
         if (res.data.status === 1) {
           await context.dispatch("getSubDir");
           context.commit("mutateCurrentDirID", "");

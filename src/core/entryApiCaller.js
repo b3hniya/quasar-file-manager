@@ -12,9 +12,8 @@ export async function getNewAccessToken(context) {
     });
     setRefreshTokenCookie(res.data.data.refresh_token);
     setAccessTokenCookie(res.data.data.access_token);
-    return res;
   } catch (e) {
-    context.dispatch(
+    await context.dispatch(
       "inAppNotification/raiseAnError",
       e.response.data.message,
       { root: true }
