@@ -1,7 +1,7 @@
 <template>
   <q-header dense>
     <q-toolbar dense class="bg-white text-dark">
-      <q-btn class="q-px-md" id="logout-btn" @click="logout"> Logout </q-btn>
+      <q-btn class="q-px-md" id="logout-btn" @click="logout"> Logout</q-btn>
       <q-toolbar-title class="text-weight-light"> {{ email }}</q-toolbar-title>
     </q-toolbar>
   </q-header>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     email() {
-      return this.$store.state.applicationHeader.email;
+      return Cookies.get("email");
     },
   },
 };
