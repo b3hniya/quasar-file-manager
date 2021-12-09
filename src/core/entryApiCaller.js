@@ -4,15 +4,15 @@ import {
   setAccessTokenCookie,
   setRefreshTokenCookie,
 } from "src/core/cookieSetter";
-import Index from "src/router";
 
 export async function getNewAccessToken(context) {
   try {
-    await entryBoot().post("/refresh", {
+    const res = await entryBoot().post("/refresh", {
       refresh_token: Cookies.get("refresh_token"),
     });
     setRefreshTokenCookie(res.data.data.refresh_token);
     setAccessTokenCookie(res.data.data.access_token);
+    return res;
   } catch (e) {
     context.dispatch(
       "inAppNotification/raiseAnError",
