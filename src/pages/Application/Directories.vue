@@ -1,5 +1,5 @@
 <template>
-  <q-page padding style="background-color: #f1f1f1" :class="qPageClass">
+  <q-page padding style="background-color: #f1f1f1; padding: 64px" :class="qPageClass">
     <template v-if="currentDir.isEmpty()">
       <empty-directory />
     </template>
@@ -35,7 +35,7 @@ export default {
   computed: {
     qPageClass() {
       if (this.currentDir.isEmpty()) return "flex flex-center";
-      else return "";
+      return "flex";
     },
     currentDir() {
       return this.$store.state.directories.currentDir;
