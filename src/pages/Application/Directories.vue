@@ -4,40 +4,44 @@
     style="background-color: #f1f1f1; padding: 64px"
     :class="qPageClass"
   >
+    <dir-path style="position: fixed; top: 64px; left: 64px" />
+
     <template v-if="currentDir.isEmpty()">
-      <empty-directory />
+      <EmptyDir />
     </template>
 
     <template v-else>
-      <directory-button
+      <folder-button
         v-for="(dir, index) in currentDir.subDirs"
         :key="index"
         :id="dir.id"
         :name="dir.title"
       />
 
-      <create-directory-button />
+      <add-button />
     </template>
 
-    <delete-directory-pop-up />
-    <create-directory-pop-up />
+    <delete-pop-up />
+    <create-pop-up />
   </q-page>
 </template>
 
 <script>
-import EmptyDirectory from "components/Application/Directory/EmptyDirectory";
-import DirectoryButton from "components/Application/Directory/DirectoryButton";
-import CreateDirectoryButton from "components/Application/Directory/CreateDirectoryButton";
-import DeleteDirectoryPopUp from "components/Application/Directory/DeleteDirectoryPopUp";
-import CreateDirectoryPopUp from "components/Application/Directory/CreateDirectoryPopUp";
+import EmptyDir from "components/Application/Directory/EmptyDir";
+import FolderButton from "components/Application/Directory/FolderButton";
+import AddButton from "components/Application/Directory/AddButton";
+import DeletePopUp from "components/Application/Directory/DeletePopUp";
+import CreatePopUp from "components/Application/Directory/CreatePopUp";
+import DirPath from "components/Application/Directory/DirPath";
 
 export default {
   components: {
-    CreateDirectoryPopUp,
-    DeleteDirectoryPopUp,
-    CreateDirectoryButton,
-    DirectoryButton,
-    EmptyDirectory,
+    DirPath,
+    CreatePopUp,
+    DeletePopUp,
+    AddButton,
+    FolderButton,
+    EmptyDir,
   },
   data: () => ({
     prompt: false,
