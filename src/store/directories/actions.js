@@ -18,17 +18,17 @@ export async function getSubDir(context) {
         await context.dispatch("getSubDir");
         context.commit("mutateCurrentDirID", "");
       } catch (e) {
-        console.log(e.response.data.message);
+        context.dispatch(
+          "inAppNotification/raiseAnError",
+          e.response.data.message,
+          { root: true }
+        );
         Index().go(-1);
       }
     } else {
-      context.commit("inAppNotification/componentDisplayMutation", true, {
-        root: true,
-      });
-      context.commit("inAppNotification/typeMutation", "error", { root: true });
-      context.commit(
-        "inAppNotification/messageMutation",
-        e.response.data.message + " \n please register again.",
+      context.dispatch(
+        "inAppNotification/raiseAnError",
+        e.response.data.message,
         { root: true }
       );
       Index().go(-1);

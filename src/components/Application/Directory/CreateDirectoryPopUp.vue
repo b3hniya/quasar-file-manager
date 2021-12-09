@@ -61,7 +61,13 @@ export default {
         await appBoot().post(this.currentDirId, { title: this.dirName });
         await this.$store.dispatch("directories/getSubDir");
       } catch (e) {
-        console.log(e);
+        this.$store.dispatch(
+          "inAppNotification/raiseAnError",
+          e.response.data.message,
+          { root: true }
+        );
+
+        this.$router.go(-1);
       }
     },
   },
