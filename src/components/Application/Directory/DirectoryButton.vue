@@ -16,6 +16,9 @@ export default {
   name: "DirectoryButton",
   components: { DirectoryOptionMenu },
   props: ["name", "id"],
+  data: () => ({
+    test: true,
+  }),
   methods: {
     changeDir() {
       doubleClickHandler(
