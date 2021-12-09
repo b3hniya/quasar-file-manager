@@ -14,31 +14,31 @@
         <q-input
           dense
           outlined
-          class="text-dark q-mx-md"
-          v-model="dirName"
           autofocus
-          @keyup.enter="prompt = false"
           label="title"
+          v-model="dirName"
+          class="text-dark q-mx-md"
           style="background-color: #fff"
+          @keyup.enter="createDirectory"
         />
       </q-card-section>
 
       <q-card-actions align="center" class="text-primary q-mt-md">
         <q-btn
-          label="Cancel"
           outline
           color="dark"
-          class="q-px-lg flex flex-center"
-          style="text-transform: none; height: 32px"
+          label="Cancel"
           v-close-popup
+          id="cancel-btn"
+          class="q-px-lg flex flex-center"
         />
         <q-btn
           flat
-          label="Create"
-          class="bg-dark text-white text-weight-light q-px-xl flex flex-center"
-          style="text-transform: none; height: 32px"
-          @click="createDirectory"
           v-close-popup
+          label="Create"
+          id="create-btn"
+          @click="create"
+          class="bg-dark text-white text-weight-light q-px-xl flex flex-center"
         />
       </q-card-actions>
     </q-card>
@@ -46,31 +46,19 @@
 </template>
 
 <script>
-import appBoot from "boot/appBoot";
+import createDirectory from "./createDirectory.mixin";
 
 export default {
   name: "CreatePopUp",
   data: () => ({
     dirName: "",
   }),
+  mixins: [createDirectory],
 
   methods: {
-    //TODO => add calling api feature to this component.
-    async createDirectory() {
-      try {
-        await appBoot().post(this.currentDirId, { title: this.dirName });
-        await this.$store.dispatch("directories/getSubDir");
-      } catch (e) {
-        this.$store.dispatch(
-          "inAppNotification/raiseAnError",
-          e.response.data.message,
-          { root: true }
-        );
-
-        this.$router.go(-1);
-      }
-
-
+    async create() {
+      await this.createDirectory(this.dirName);
+      this.prompt = false;
       this.dirName = "";
     },
   },
@@ -91,4 +79,12 @@ export default {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+#create-btn
+  text-transform: none
+  height: 32px
+
+#cancel-btn
+  height: 32px
+  text-transform: none
+</style>
