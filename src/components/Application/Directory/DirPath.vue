@@ -5,7 +5,7 @@
         v-for="(dir, index) in dirs"
         :key="index"
         :label="dir.name"
-        @click="changeDirectory(dir.name, dir.id, true)"
+        @click="changeDirectory(dir.name, dir.id, 'remove')"
         class="path-link"
       />
     </q-breadcrumbs>

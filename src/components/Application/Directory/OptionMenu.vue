@@ -20,7 +20,7 @@
       </q-menu>
     </q-btn>
 
-    <q-dialog v-model="test" persistent>
+    <q-dialog v-model="deleteDialog" persistent>
       <q-card
         style="min-width: 350px"
         flat
@@ -49,7 +49,7 @@
             label="Delete"
             class="bg-dark text-white text-weight-light q-px-xl flex flex-center"
             style="text-transform: none; height: 32px"
-            @click="deleteDirectory"
+            @click="deleteDir"
             v-close-popup
           />
         </q-card-actions>
@@ -59,44 +59,29 @@
 </template>
 
 <script>
-import appBoot from "boot/appBoot";
+import changeDirectory from "./changeDirectory.mixin";
+import deleteDirectory from "./deleteDirectory.mixin";
 
 export default {
   name: "OptionMenu",
   props: ["id", "name"],
+  mixins: [changeDirectory, deleteDirectory],
   data: () => ({
     menu: false,
-    test: false,
+    deleteDialog: false,
   }),
   methods: {
     openDeletePopUp() {
-      this.test = true;
+      this.deleteDialog = true;
     },
     changeDir() {
-      this.$store.commit("directories/mutateCurrentDirID", this.id);
-      this.$store.commit("directories/mutateCurrentDirName", this.name);
-      this.$store.dispatch("directories/getSubDir");
-      this.$store.commit("directories/mutateDirs", {
-        name: this.name,
-        id: this.id,
-      });
+      this.changeDirectory(this.name, this.id, "change");
 
-      this.test = false;
+      this.deleteDialog = false;
     },
-    async deleteDirectory() {
-      this.test = false;
-      try {
-        await appBoot().delete(this.id);
-        await this.$store.dispatch("directories/getSubDir");
-      } catch (e) {
-        this.$store.dispatch(
-          "inAppNotification/raiseAnError",
-          e.response.data.message,
-          { root: true }
-        );
-
-        this.$router.go(-1);
-      }
+    async deleteDir() {
+      this.deleteDialog = false;
+      await this.deleteDirectory(this.id);
     },
   },
 };
@@ -110,18 +95,18 @@ export default {
   justify-content: start
 
 #more-icon
-  height: 28px
+  z-index: 1
   width: 28px
+  height: 28px
   display: flex
-  justify-content: center
-  align-items: center
+  margin-top: -4px
+  margin-left: 64px
   border-radius: 50%
+  position: absolute
+  align-items: center
+  justify-content: center
   background-color: rgba(0, 0, 0, 0)
   transition: background-color 0.2s ease 0s
-  position: absolute
-  margin-left: 64px
-  margin-top: -4px
-  z-index: 1
 
   &:hover
     background-color: rgba(0, 0, 0, 0.1)
