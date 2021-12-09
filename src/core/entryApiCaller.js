@@ -15,6 +15,6 @@ export async function getNewAccessToken() {
       setAccessTokenCookie(res.data.data.access_token);
     })
     .catch((e) => {
-      console.log(e);
+      console.log(e)
     });
 }
