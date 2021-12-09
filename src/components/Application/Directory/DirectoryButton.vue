@@ -1,7 +1,6 @@
 <template>
   <div>
-    <q-icon name="more_horiz" size="24px" id="more-icon" />
-
+    <directory-option-menu :id="id" :name="name" />
     <div class="flex items-center column" id="folder-btn">
       <q-icon @click="changeDir" name="folder" size="96px" />
       <span> {{ name }}</span>
@@ -11,9 +10,11 @@
 
 <script>
 import doubleClickHandler from "src/core/doubleClickHandler";
+import DirectoryOptionMenu from "components/Application/Directory/DirectoryOptionMenu";
 
 export default {
   name: "DirectoryButton",
+  components: { DirectoryOptionMenu },
   props: ["name", "id"],
   methods: {
     changeDir() {
@@ -34,16 +35,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-#more-icon
-  border-radius: 50%
-  background-color: rgba(0, 0, 0, 0)
-  transition: background-color 0.2s ease 0s
-  position: absolute
-  margin-left: 64px
-  z-index: 1
-
-  &:hover
-    background-color: rgba(0, 0, 0, 0.1)
 
 
 #folder-btn
