@@ -4,6 +4,7 @@ import directories from "./directories";
 import createDirectory from "./createDirectory";
 import inAppNotification from "./inAppNotification";
 import applicationHeader from "./applicationHeader";
+import loadingDialog from "./loadingDialog";
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default function (/* { ssrContext } */) {
       createDirectory,
       inAppNotification,
       applicationHeader,
+      loadingDialog
     },
 
     strict: process.env.DEBUGGING,

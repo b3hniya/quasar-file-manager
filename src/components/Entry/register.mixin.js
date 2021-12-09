@@ -12,6 +12,8 @@ export default {
       this.password = "";
     },
     async submit() {
+      this.$store.commit("loadingDialog/mutateLoadingModel", true);
+
       entryBoot()
         .post("/login", {
           email: this.email,
@@ -43,6 +45,8 @@ export default {
           );
           this.$store.commit("inAppNotification/typeMutation", "error");
         });
+
+      this.$store.commit("loadingDialog/mutateLoadingModel", true);
     },
   },
 };

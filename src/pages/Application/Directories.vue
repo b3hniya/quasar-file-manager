@@ -23,6 +23,7 @@
 
     <delete-pop-up />
     <create-pop-up />
+    <loading-dialog />
   </q-page>
 </template>
 
@@ -33,9 +34,11 @@ import AddButton from "components/Application/Directory/AddButton";
 import DeletePopUp from "components/Application/Directory/DeletePopUp";
 import CreatePopUp from "components/Application/Directory/CreatePopUp";
 import DirPath from "components/Application/Directory/DirPath";
+import LoadingDialog from "components/LoadingDialog";
 
 export default {
   components: {
+    LoadingDialog,
     DirPath,
     CreatePopUp,
     DeletePopUp,

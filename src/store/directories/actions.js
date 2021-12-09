@@ -4,6 +4,8 @@ import appBoot from "boot/appBoot";
 import { Cookies } from "quasar";
 
 export async function getSubDir(context) {
+  context.commit("loadingDialog/mutateLoadingModel", true, { root: true });
+
   if (context.state.currentDir.id === "") {
     context.commit("mutateCurrentDirName", "root");
     context.commit("mutateCurrentDirID", Cookies.get("root_dir_id"));
@@ -36,4 +38,6 @@ export async function getSubDir(context) {
       Index().go(-1);
     }
   }
+
+  context.commit("loadingDialog/mutateLoadingModel", false, { root: true });
 }
