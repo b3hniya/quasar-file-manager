@@ -14,9 +14,12 @@ export async function getSubDir(context) {
   } catch (e) {
     if (e.response.data.message === "jwt expired") {
       try {
-        await getNewAccessToken();
-        await context.dispatch("getSubDir");
-        context.commit("mutateCurrentDirID", "");
+        const res = await getNewAccessToken();
+        console.log(res.data);
+        if (res.data.status === 1) {
+          await context.dispatch("getSubDir");
+          context.commit("mutateCurrentDirID", "");
+        }
       } catch (e) {
         context.dispatch(
           "inAppNotification/raiseAnError",
@@ -34,27 +37,4 @@ export async function getSubDir(context) {
       Index().go(-1);
     }
   }
-
-  // appBoot()
-  //   .get(context.state.currentDir.id)
-  //   .then((res) => {
-  //     console.log(res.data);
-  //     context.commit("mutateCurrentSubDirs", res.data.data.directories);
-  //   })
-  //   .catch((e) => {
-  //     if (e.response.data.message === "jwt expired") {
-  //       getNewAccessToken().then(() => {
-  //         context.commit("mutateCurrentDirID", "");
-  //         context.dispatch("getSubDir");
-  //       });
-  //     }
-  //     else {
-  //       this.$store.commit("inAppNotification/componentDisplayMutation", true);
-  //       this.$store.commit("inAppNotification/typeMutation", "error");
-  //       this.$store.commit(
-  //         "inAppNotification/messageMutation",
-  //         e.response.data.message
-  //       );
-  //     }
-  //   });
 }
