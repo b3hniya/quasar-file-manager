@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import changeDirectory from "./changeDirectory.mixin";
+import changeDirectory from "../../../mixins/changeDirectory.mixin";
 
 export default {
   name: "DirPath",

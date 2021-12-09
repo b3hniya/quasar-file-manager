@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import createDirectory from "./createDirectory.mixin";
+import createDirectory from "../../../mixins/createDirectory.mixin";
 
 export default {
   name: "CreatePopUp",

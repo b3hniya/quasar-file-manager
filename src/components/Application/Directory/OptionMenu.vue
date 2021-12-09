@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import changeDirectory from "./changeDirectory.mixin";
-import deleteDirectory from "./deleteDirectory.mixin";
+import changeDirectory from "../../../mixins/changeDirectory.mixin";
+import deleteDirectory from "../../../mixins/deleteDirectory.mixin";
 
 export default {
   name: "OptionMenu",
