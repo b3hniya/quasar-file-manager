@@ -1,10 +1,6 @@
 <template>
   <div>
-    <q-icon
-      name="more_horiz"
-      size="24px"
-      id="more-icon"
-    />
+    <q-icon name="more_horiz" size="24px" id="more-icon" />
 
     <div class="flex items-center column" id="folder-btn">
       <q-icon @click="changeDir" name="folder" size="96px" />
@@ -14,14 +10,24 @@
 </template>
 
 <script>
+import doubleClickHandler from "src/core/doubleClickHandler";
+
 export default {
   name: "DirectoryButton",
   props: ["name", "id"],
   methods: {
     changeDir() {
-      this.$store.commit("directories/mutateCurrentDirID", this.id);
-      this.$store.commit("directories/mutateCurrentDirName", this.name);
-      this.$store.dispatch("directories/getSubDir");
+      doubleClickHandler(
+        (context) => {
+          context.store.commit("directories/mutateCurrentDirID", context.id);
+          context.store.commit(
+            "directories/mutateCurrentDirName",
+            context.name
+          );
+          context.store.dispatch("directories/getSubDir");
+        },
+        { store: this.$store, id: this.id, name: this.name }
+      );
     },
   },
 };
@@ -35,6 +41,7 @@ export default {
   position: absolute
   margin-left: 64px
   z-index: 1
+
   &:hover
     background-color: rgba(0, 0, 0, 0.1)
 
