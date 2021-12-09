@@ -1,5 +1,9 @@
 <template>
-  <q-page padding style="background-color: #f1f1f1; padding: 64px" :class="qPageClass">
+  <q-page
+    padding
+    style="background-color: #f1f1f1; padding: 64px"
+    :class="qPageClass"
+  >
     <template v-if="currentDir.isEmpty()">
       <empty-directory />
     </template>
@@ -11,19 +15,30 @@
         :id="dir.id"
         :name="dir.title"
       />
+
+      <create-directory-button />
     </template>
 
-    <create-directory />
+    <delete-directory-pop-up />
+    <create-directory-pop-up />
   </q-page>
 </template>
 
 <script>
 import EmptyDirectory from "components/Application/Directory/EmptyDirectory";
-import CreateDirectory from "components/Application/Directory/CreateDirectoryPopUp";
 import DirectoryButton from "components/Application/Directory/DirectoryButton";
+import CreateDirectoryButton from "components/Application/Directory/CreateDirectoryButton";
+import DeleteDirectoryPopUp from "components/Application/Directory/DeleteDirectoryPopUp";
+import CreateDirectoryPopUp from "components/Application/Directory/CreateDirectoryPopUp";
 
 export default {
-  components: { DirectoryButton, CreateDirectory, EmptyDirectory },
+  components: {
+    CreateDirectoryPopUp,
+    DeleteDirectoryPopUp,
+    CreateDirectoryButton,
+    DirectoryButton,
+    EmptyDirectory,
+  },
   data: () => ({
     prompt: false,
   }),

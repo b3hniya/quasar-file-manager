@@ -49,7 +49,7 @@
 import appBoot from "boot/appBoot";
 
 export default {
-  name: "CreateDirectory",
+  name: "CreateDirectoryPopUp",
   data: () => ({
     dirName: "",
   }),
