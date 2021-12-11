@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import register from "./register.mixin";
+import register from "../../mixins/register.mixin";
 
 export default {
   mixins: [register],

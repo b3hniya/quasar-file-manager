@@ -60,12 +60,11 @@
 
 <script>
 import changeDirectory from "../../../mixins/changeDirectory.mixin";
-import deleteDirectory from "../../../mixins/deleteDirectory.mixin";
 
 export default {
   name: "OptionMenu",
   props: ["id", "name"],
-  mixins: [changeDirectory, deleteDirectory],
+  mixins: [changeDirectory],
   data: () => ({
     menu: false,
     deleteDialog: false,
@@ -81,7 +80,7 @@ export default {
     },
     async deleteDir() {
       this.deleteDialog = false;
-      await this.deleteDirectory(this.id);
+      await this.$store.dispatch("directories/deleteDir", this.id);
     },
   },
 };

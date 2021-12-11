@@ -6,8 +6,9 @@ import {
 } from "src/core/cookieSetter";
 
 export async function getNewAccessToken(context) {
+  let res;
   try {
-    const res = await entryBoot().post("/refresh", {
+    res = await entryBoot().post("/refresh", {
       refresh_token: Cookies.get("refresh_token"),
     });
     setRefreshTokenCookie(res.data.data.refresh_token);
@@ -20,4 +21,7 @@ export async function getNewAccessToken(context) {
     );
     // Index().go(-1);
   }
+
+
+  return res;
 }

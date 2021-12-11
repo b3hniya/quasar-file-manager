@@ -46,18 +46,16 @@
 </template>
 
 <script>
-import createDirectory from "../../../mixins/createDirectory.mixin";
-
 export default {
   name: "CreatePopUp",
   data: () => ({
     dirName: "",
   }),
-  mixins: [createDirectory],
 
   methods: {
     async create() {
-      await this.createDirectory(this.dirName);
+      await this.$store.dispatch("directories/createDir", this.dirName);
+
       this.prompt = false;
       this.dirName = "";
     },
