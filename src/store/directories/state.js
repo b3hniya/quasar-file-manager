@@ -1,6 +1,3 @@
-import { Cookies } from "quasar";
-const rootId = Cookies.get("root_dir_id");
-
 export default function () {
   return {
     currentDir: {
@@ -12,6 +9,6 @@ export default function () {
       },
     },
 
-    dirs: [{ name: "Home", id: rootId }],
+    dirs: [],
   };
 }

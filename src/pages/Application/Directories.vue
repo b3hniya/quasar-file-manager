@@ -35,6 +35,7 @@ import DeletePopUp from "components/Application/Directory/DeletePopUp";
 import CreatePopUp from "components/Application/Directory/CreatePopUp";
 import DirPath from "components/Application/Directory/DirPath";
 import LoadingDialog from "components/LoadingDialog";
+import { Cookies } from "quasar";
 
 export default {
   components: {
@@ -52,6 +53,10 @@ export default {
 
   mounted() {
     this.$store.dispatch("directories/getSubDir");
+    this.$store.commit("directories/mutateDirs", {
+      name: "Home",
+      id: Cookies.get("root_dir_id"),
+    });
   },
 
   computed: {
