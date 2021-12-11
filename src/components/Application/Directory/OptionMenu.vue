@@ -5,7 +5,7 @@
       <q-menu anchor="bottom left">
         <q-list dense style="min-width: 100px">
           <q-item clickable @click="changeDir">
-            <q-item-section class="menu-item">
+            <q-item-section class="menu-item flex-start">
               <q-icon name="open_in_new" />
               <span class="q-mx-sm"> Open </span>
             </q-item-section>
@@ -92,7 +92,6 @@ export default {
   display: flex
   flex-direction: row
   align-items: center
-  justify-content: start
 
 #more-icon
   z-index: 1
